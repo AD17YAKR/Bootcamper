@@ -1,0 +1,26 @@
+{
+  "name": "bootcamper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AD17YAKR/Bootcamper.git"
+  },
+  "author": "AD17YAKR",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AD17YAKR/Bootcamper/issues"
+  },
+  "homepage": "https://github.com/AD17YAKR/Bootcamper#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.3"
+  }
+}
