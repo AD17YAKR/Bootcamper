@@ -36,7 +36,7 @@ const BootcampSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please add an address']
     },
-    //TODO: Update Location
+
     location: {
         //GeoJson Code
         type: { type: String, enum: ['Point'], required: false },
