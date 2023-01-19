@@ -1,6 +1,8 @@
+const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const fileupload = require('express-fileupload');
 const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/err');
@@ -28,6 +30,12 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
+//File upload middleware
+app.use(fileupload());
+
+//set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 //Mounting Bootcamp Routers
 app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/courses', courses);
@@ -40,10 +48,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Bootcamper');
 });
 
-const server = app.listen(
-    port,
-    console.log(`Server running in ${process.env.NODE_ENV} mode on ${port}`)
-);
+const server = app.listen(port, console.log(`Server running in ${process.env.NODE_ENV} mode on ${port}`));
 
 //Handle Unhandled promise rejection
 process.on('unhandledRejection', (err, promise) => {
