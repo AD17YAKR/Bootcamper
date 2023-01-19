@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 
 //Route Files
 const bootcamps = require('./routes/bootcamps');
+const courses = require('./routes/courses');
 
 //Connect to Database
 connectDB();
@@ -29,6 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 
 //Mounting Bootcamp Routers
 app.use('/api/v1/bootcamps', bootcamps);
+app.use('/api/v1/courses', courses);
 
 app.use(errorHandler);
 
