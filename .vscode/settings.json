@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "bootcamp"
-    ]
+    ],
+    "dotenv.enableAutocloaking": false
 }

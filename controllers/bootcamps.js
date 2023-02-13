@@ -9,7 +9,7 @@ const Bootcamp = require('../models/Bootcamp');
 //@access   Public
 
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
-  
+    console.log(req.params);
     res.status(200).json(res.advanceResults);
 });
 
@@ -132,7 +132,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
 
     //Create custom filename
     file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
-    
+
     file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
         if (err) {
             console.error(err);

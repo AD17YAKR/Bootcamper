@@ -1,32 +1,36 @@
 {
-  "name": "bootcamper",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AD17YAKR/Bootcamper.git"
-  },
-  "author": "AD17YAKR",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/AD17YAKR/Bootcamper/issues"
-  },
-  "homepage": "https://github.com/AD17YAKR/Bootcamper#readme",
-  "dependencies": {
-    "body-parser": "^1.20.1",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "express-fileupload": "^1.4.0",
-    "mongoose": "^6.8.3",
-    "morgan": "^1.10.0",
-    "node-geocoder": "^4.2.0",
-    "slugify": "^1.6.5"
-  },
-  "devDependencies": {
-    "prettier": "^2.8.3"
-  }
+    "name": "bootcamper",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "dev": "nodemon",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AD17YAKR/Bootcamper.git"
+    },
+    "author": "AD17YAKR",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/AD17YAKR/Bootcamper/issues"
+    },
+    "homepage": "https://github.com/AD17YAKR/Bootcamper#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.20.1",
+        "cookie-parser": "^1.4.6",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-fileupload": "^1.4.0",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^6.8.3",
+        "morgan": "^1.10.0",
+        "node-geocoder": "^4.2.0",
+        "slugify": "^1.6.5"
+    },
+    "devDependencies": {
+        "prettier": "^2.8.3"
+    }
 }
