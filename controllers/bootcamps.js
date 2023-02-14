@@ -34,6 +34,17 @@ exports.getBootcamp = asyncHandler(async (req, res, next) => {
 //@access   Private
 
 exports.createBootcamp = asyncHandler(async (req, res, next) => {
+    //Add user to req.body
+    req.body.user = req.user.id;
+
+    //Check for published bootcamps by this user
+    const publishedBootcamps = await Bootcamp.findOne({ user: req.user.id });
+
+    //If user is not an admin, they can only create single bootcamp
+    if (publishedBootcamps && req.user.role !== 'admin') {
+        return next(new ErrorResponse(`User with id ${req.user.id} already have a bootcamp`, 400));
+    }
+
     const bootcamp = await Bootcamp.create(req.body);
     res.status(201).json({ success: true, data: bootcamp });
 });
@@ -43,14 +54,21 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
 //@access   Private
 
 exports.updateBootcamp = asyncHandler(async (req, res, next) => {
-    const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true
-    });
+    let bootcamp = await Bootcamp.findById(req.params.id);
 
     if (!bootcamp) {
         next(error);
     }
+
+    // Make Sure user updating the bootcamp is the owner
+    if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(new ErrorResponse(`User ${req.params.id} is unauthorized to updated this bootcamp`, 401));
+    }
+
+    bootcamp = await Bootcamp.findOneAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    });
 
     res.status(200).json({
         success: true,
@@ -116,6 +134,11 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
 
     if (!req.files) {
         return next(new ErrorResponse('Please Upload a file', 404));
+    }
+
+    // Make Sure user updating the bootcamp is the owner
+    if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(new ErrorResponse(`User ${req.params.id} is unauthorized to updated this bootcamp`, 401));
     }
 
     const file = req.files.file;
