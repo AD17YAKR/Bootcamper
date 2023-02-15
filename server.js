@@ -54,7 +54,10 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Bootcamper');
 });
 
-const server = app.listen(port, console.log(`Server running in ${process.env.NODE_ENV} mode on ${port}`));
+const server = app.listen(
+    port,
+    console.log(`Server running in ${process.env.NODE_ENV} mode on ${port}`)
+);
 
 //Handle Unhandled promise rejection
 process.on('unhandledRejection', (err, promise) => {

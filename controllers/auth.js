@@ -49,12 +49,51 @@ exports.login = asyncHandler(async (req, res, next) => {
     sendTokenResponse(user, 200, res);
 });
 
+//@desc     Get Current Logged in user
+//@routes   POST /api/v1/auth/me
+//@access   Private
+exports.getMe = asyncHandler(async (req, res, next) => {
+    console.log(req.user);
+    const user = await User.findById(req.user.id);
+
+    res.status(200).json({
+        success: true,
+        data: user
+    });
+});
+
+//@desc     Forgot Password
+//@routes   POST /api/v1/auth/forgotPassword/
+//@access   Public
+exports.forgotPassword = asyncHandler(async (req, res, next) => {
+    const user = await User.findOne({
+        email: req.body.email
+    });
+
+    if (!user) {
+        return next(new ErrorResponse('No user with this email found', 404));
+    }
+
+    //Get Reset Token
+    const resetToken = user.getResetPasswordToken();
+
+    await user.save({ validateBeforeSave: false });
+
+    res.status(200).json({
+        success: true,
+        data: user
+    });
+});
+
+//Helper unction to send toke response
 const sendTokenResponse = (user, statusCode, res) => {
     //JWT Token Creation
     const token = user.getSignedJwtToken();
 
     const options = {
-        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
+        expires: new Date(
+            Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+        ),
         httpOnly: true
     };
 
@@ -67,17 +106,3 @@ const sendTokenResponse = (user, statusCode, res) => {
         token
     });
 };
-
-
-//@desc     Get Current Logged in user
-//@routes   POST /api/v1/auth/me
-//@access   Private
-exports.getMe = asyncHandler(async (req, res, next) => {
-    console.log(req.user);
-    const user = await User.findById(req.user.id);
-    
-    res.status(200).json({
-        success: true,
-        data: user
-    });
-});

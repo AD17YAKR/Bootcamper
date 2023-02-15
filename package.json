@@ -5,7 +5,8 @@
     "main": "server.js",
     "scripts": {
         "dev": "nodemon",
-        "start": "node server.js"
+        "start": "node server.js",
+        "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\""
     },
     "repository": {
         "type": "git",
@@ -31,6 +32,6 @@
         "slugify": "^1.6.5"
     },
     "devDependencies": {
-        "prettier": "^2.8.3"
+        "prettier": "^2.8.4"
     }
 }

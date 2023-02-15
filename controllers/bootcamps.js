@@ -42,7 +42,9 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
 
     //If user is not an admin, they can only create single bootcamp
     if (publishedBootcamps && req.user.role !== 'admin') {
-        return next(new ErrorResponse(`User with id ${req.user.id} already have a bootcamp`, 400));
+        return next(
+            new ErrorResponse(`User with id ${req.user.id} already have a bootcamp`, 400)
+        );
     }
 
     const bootcamp = await Bootcamp.create(req.body);
@@ -62,7 +64,12 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 
     // Make Sure user updating the bootcamp is the owner
     if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
-        return next(new ErrorResponse(`User ${req.params.id} is unauthorized to updated this bootcamp`, 401));
+        return next(
+            new ErrorResponse(
+                `User ${req.params.id} is unauthorized to updated this bootcamp`,
+                401
+            )
+        );
     }
 
     bootcamp = await Bootcamp.findOneAndUpdate(req.params.id, req.body, {
@@ -138,7 +145,12 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
 
     // Make Sure user updating the bootcamp is the owner
     if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
-        return next(new ErrorResponse(`User ${req.params.id} is unauthorized to updated this bootcamp`, 401));
+        return next(
+            new ErrorResponse(
+                `User ${req.params.id} is unauthorized to updated this bootcamp`,
+                401
+            )
+        );
     }
 
     const file = req.files.file;
@@ -150,7 +162,12 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
 
     //Check FileSize
     if (file.size > process.env.MAX_FILE_UPLOAD) {
-        return next(new ErrorResponse(`Please Upload a file less than ${process.env.MAX_FILE_UPLOAD}`, 400));
+        return next(
+            new ErrorResponse(
+                `Please Upload a file less than ${process.env.MAX_FILE_UPLOAD}`,
+                400
+            )
+        );
     }
 
     //Create custom filename
