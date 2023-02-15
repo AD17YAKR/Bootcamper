@@ -19,16 +19,20 @@ const bootcamps = JSON.parse(
     fs.readFileSync(`${__dirname}/_data/bootcamps.json`, 'utf-8')
 );
 
-const courses = JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`, 'utf-8'));
+const courses = JSON.parse(
+    fs.readFileSync(`${__dirname}/_data/courses.json`, 'utf-8')
+);
 
-const users = JSON.parse(fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8'));
+const users = JSON.parse(
+    fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8')
+);
 
 //Import to db
 const importData = async () => {
     try {
+        await User.create(users);
         await Bootcamp.create(bootcamps);
         await Course.create(courses);
-        await User.create(users);
         console.log('Data Imported');
         process.exit;
     } catch (err) {

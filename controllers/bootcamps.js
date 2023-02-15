@@ -38,12 +38,17 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
     req.body.user = req.user.id;
 
     //Check for published bootcamps by this user
-    const publishedBootcamps = await Bootcamp.findOne({ user: req.user.id });
+    const publishedBootcamps = await Bootcamp.findOne({
+        user: req.user.id
+    });
 
     //If user is not an admin, they can only create single bootcamp
     if (publishedBootcamps && req.user.role !== 'admin') {
         return next(
-            new ErrorResponse(`User with id ${req.user.id} already have a bootcamp`, 400)
+            new ErrorResponse(
+                `User with id ${req.user.id} already have a bootcamp`,
+                400
+            )
         );
     }
 
@@ -63,7 +68,10 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
     }
 
     // Make Sure user updating the bootcamp is the owner
-    if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    if (
+        bootcamp.user.toString() !== req.user.id &&
+        req.user.role !== 'admin'
+    ) {
         return next(
             new ErrorResponse(
                 `User ${req.params.id} is unauthorized to updated this bootcamp`,
@@ -119,7 +127,11 @@ exports.getBootcampInRadius = asyncHandler(async (req, res, next) => {
     const radius = distance / 3963;
 
     const bootcamps = await Bootcamp.find({
-        location: { $geoWithin: { $centerSphere: [[lat, lng], radius] } }
+        location: {
+            $geoWithin: {
+                $centerSphere: [[lat, lng], radius]
+            }
+        }
     });
     res.status(200).json({
         success: true,
@@ -136,7 +148,12 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
     const bootcamp = await Bootcamp.findById(req.params.id);
 
     if (!bootcamp) {
-        next(new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404));
+        next(
+            new ErrorResponse(
+                `Bootcamp not found with id ${req.params.id}`,
+                404
+            )
+        );
     }
 
     if (!req.files) {
@@ -144,7 +161,10 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
     }
 
     // Make Sure user updating the bootcamp is the owner
-    if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    if (
+        bootcamp.user.toString() !== req.user.id &&
+        req.user.role !== 'admin'
+    ) {
         return next(
             new ErrorResponse(
                 `User ${req.params.id} is unauthorized to updated this bootcamp`,
@@ -173,16 +193,23 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
     //Create custom filename
     file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
 
-    file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
-        if (err) {
-            console.error(err);
-            return next(new ErrorResponse(`Problem with file upload`, 400));
-        }
+    file.mv(
+        `${process.env.FILE_UPLOAD_PATH}/${file.name}`,
+        async (err) => {
+            if (err) {
+                console.error(err);
+                return next(
+                    new ErrorResponse(`Problem with file upload`, 400)
+                );
+            }
 
-        await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name });
-        res.status(200).json({
-            success: true,
-            data: file.name
-        });
-    });
+            await Bootcamp.findByIdAndUpdate(req.params.id, {
+                photo: file.name
+            });
+            res.status(200).json({
+                success: true,
+                data: file.name
+            });
+        }
+    );
 });

@@ -56,7 +56,12 @@
         "phone": "(444) 444-4444",
         "email": "enroll@devcentral.com",
         "address": "45 Upper College Rd Kingston RI 02881",
-        "careers": ["Mobile Development", "Web Development", "Data Science", "Business"],
+        "careers": [
+            "Mobile Development",
+            "Web Development",
+            "Data Science",
+            "Business"
+        ],
         "housing": false,
         "jobAssistance": true,
         "jobGuarantee": true,

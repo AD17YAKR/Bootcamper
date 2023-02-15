@@ -10,7 +10,10 @@ const advanceResults = (model, populate) => async (req, res, next) => {
 
     let queryStr = JSON.stringify(reqQuery);
 
-    queryStr = queryStr.replace(/\b(gt|gte|lte|lte|in)\b/g, (match) => `$${match}`);
+    queryStr = queryStr.replace(
+        /\b(gt|gte|lte|lte|in)\b/g,
+        (match) => `$${match}`
+    );
 
     query = model.find(JSON.parse(queryStr));
 
@@ -30,7 +33,7 @@ const advanceResults = (model, populate) => async (req, res, next) => {
 
     //Pagination
     const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 2;
+    const limit = parseInt(req.query.limit, 10) || 25;
     const startIndex = parseInt(page - 1) * limit;
     const endIndex = page * limit;
     const total = await model.countDocuments();
