@@ -1,0 +1,1058 @@
+{
+    "info": {
+        "_postman_id": "130bd565-5362-43ca-bd29-48e0e65712d5",
+        "name": "Bootcamper",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "18470104"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Register User",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.environment.set(\"TOKEN\", pm.response.json().token)"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\": \"Aditya\",\r\n    \"email\": \"Aditya@Ad17yakr.com\",\r\n    \"role\": \"admin\",\r\n    \"password\": \"secret\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/register",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "auth", "register"]
+                        },
+                        "description": "Register New User Based on\n\n- name\n- email\n- role\n    \n\nand it return the JWT token"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login User",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.environment.set(\"TOKEN\", pm.response.json().token)"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"email\": \"Aditya@Ad17yakr.com\",\r\n    \"password\": \"secret\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/login?email",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "auth", "login"],
+                            "query": [
+                                {
+                                    "key": "email",
+                                    "value": null
+                                }
+                            ]
+                        },
+                        "description": "Login user user email and login and get JWT token"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Log Out Current User",
+                    "protocolProfileBehavior": {
+                        "disabledSystemHeaders": {
+                            "content-length": true,
+                            "host": true,
+                            "connection": true,
+                            "accept-encoding": true,
+                            "accept": true,
+                            "user-agent": true
+                        }
+                    },
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWU2OWY2NzJkNmIyMGU5MDI4Mjk0MyIsImlhdCI6MTY3NjU2OTA4MSwiZXhwIjoxNjc5MTYxMDgxfQ.uevO54QGQDiWeGgpV3jVf5SI_TilEdkRUY-OATlasVo",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWNhMmUzMTI5OWE0NWYxMTBkYTA4NiIsImlhdCI6MTY3NjQ5NDk3OSwiZXhwIjoxNjc5MDg2OTc5fQ.pX7h0aj9qKL2f3D4m04wDEq6bIgMbVtfkPlWZzRDhgg",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/logout",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "auth", "logout"],
+                            "query": [
+                                {
+                                    "key": "email",
+                                    "value": null,
+                                    "disabled": true
+                                }
+                            ]
+                        },
+                        "description": "Delete current User cookies"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Current Logged in User Details",
+                    "protocolProfileBehavior": {
+                        "disabledSystemHeaders": {
+                            "content-length": true,
+                            "host": true,
+                            "connection": true,
+                            "accept-encoding": true,
+                            "accept": true,
+                            "user-agent": true
+                        }
+                    },
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWNhMmUzMTI5OWE0NWYxMTBkYTA4NiIsImlhdCI6MTY3NjQ5NDk3OSwiZXhwIjoxNjc5MDg2OTc5fQ.pX7h0aj9qKL2f3D4m04wDEq6bIgMbVtfkPlWZzRDhgg",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/me",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "auth", "me"],
+                            "query": [
+                                {
+                                    "key": "email",
+                                    "value": null,
+                                    "disabled": true
+                                }
+                            ]
+                        },
+                        "description": "By inserting the authorization token it return the current user details"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Forgot Password Email Request",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.environment.set(\"TOKEN\", pm.response.json().token)"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"email\": \"Ad17yakr@ad17yakr.com\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/forgotpassword",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "auth", "forgotpassword"]
+                        },
+                        "description": "Request Email when forgot password"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Reset Password by reset token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.environment.set(\"TOKEN\", pm.response.json().token)"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"password\": \"1234567\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/resetpassword/a6b15c48587e902194e698ed9d2f4275bf84a68b",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "resetpassword",
+                                "a6b15c48587e902194e698ed9d2f4275bf84a68b"
+                            ]
+                        },
+                        "description": "Reset password token received on email conating hashed id"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Current User Details",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.environment.set(\"TOKEN\", pm.response.json().token)"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWQ0YjkyOGI4Mzc1ODIzYjc5NTMxYyIsImlhdCI6MTY3NjQ5NTgxNiwiZXhwIjoxNjc5MDg3ODE2fQ.IFoeMZ-53lNh8_EKTTb9zi6TknaugimWbQ6K4X241LA",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\": \"Aditya ingh\",\r\n    \"email\": \"Ad17yakr@ad17yakr.com\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/updateddetails",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "auth", "updateddetails"]
+                        },
+                        "description": "update logged in user details"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Password ",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.environment.set(\"TOKEN\", pm.response.json().token)"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWQ0YjkyOGI4Mzc1ODIzYjc5NTMxYyIsImlhdCI6MTY3NjQ5NjI0NiwiZXhwIjoxNjc5MDg4MjQ2fQ.MnWg1EyA9xQ3bfINEWoM640_-GlQ1lM_evUJjo7X8tE",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"currentPassword\": \"secret\",\r\n    \"newPassword\": \"12345678\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/updatepassword",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "auth", "updatepassword"]
+                        },
+                        "description": "Update Password by entering current and new password"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Routes containing\n\n- Register New User\n- Login New User\n- Get Current User Details"
+        },
+        {
+            "name": "Bootcamps",
+            "item": [
+                {
+                    "name": "Get All Bootcamps",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "bootcamps"],
+                            "query": [
+                                {
+                                    "key": "sort",
+                                    "value": "name",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "select",
+                                    "value": "name",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "1",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "2",
+                                    "disabled": true
+                                }
+                            ]
+                        },
+                        "description": "A get request to get all bootcamp in the database with filtering based on variables."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Bootcamp by id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps/63c3d514a091492738e5cbd8",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "bootcamps",
+                                "63c3d514a091492738e5cbd8"
+                            ]
+                        },
+                        "description": "A get request to get bootcamp by its id"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create New Bootcamp",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\": \"ModernTech Bootcamp\",\r\n    \"description\": \"ModernTech has one goal, and that is to make you a rockstar developer and/or designer with a six figure salary. We teach both development and UI/UX\",\r\n    \"website\": \"https://moderntech.com\",\r\n    \"phone\": \"(222) 222-2222\",\r\n    \"email\": \"enroll@moderntech.com\",\r\n    \"address\": \"220 Pawtucket St, Lowell, MA 01854\",\r\n    \"careers\": [\r\n        \"Web Development\",\r\n        \"UI/UX\",\r\n        \"Mobile Development\"\r\n    ],\r\n    \"housing\": false,\r\n    \"jobAssistance\": true,\r\n    \"jobGuarantee\": false,\r\n    \"acceptGi\": true\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "bootcamps"]
+                        },
+                        "description": "A Post Route to create new Boootcamps which can either be published by a publisher or a user an input example is given below\n\n\\`\n\n``` json\n{\n    \"name\": \"ModernTech Bootcamp\",\n    \"description\": \"ModernTech has one goal, and that is to make you a rockstar developer and/or designer with a six figure salary. We teach both development and UI/UX\",\n    \"website\": \"https://moderntech.com\",\n    \"phone\": \"(222) 222-2222\",\n    \"email\": \"enroll@moderntech.com\",\n    \"address\": \"220 Pawtucket St, Lowell, MA 01854\",\n    \"careers\": [\n        \"Web Development\",\n        \"UI/UX\",\n        \"Mobile Development\"\n    ],\n    \"housing\": false,\n    \"jobAssistance\": true,\n    \"jobGuarantee\": false,\n    \"acceptGi\": true\n}\n\n```\n\n\\`"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Bootcamp by id",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\": \"Not ModernTech Bootcamp\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps/63c3d514a091492738e5cbd8",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "bootcamps",
+                                "63c3d514a091492738e5cbd8"
+                            ]
+                        },
+                        "description": "A put request to update fileds of the bootcamp present in the db.\n\nThe fields can only be updated by the creator of the boootcamp.\n\nAn example of JSON input is\n\n\\`\n\n``` json\n{\n    \"name\": \"ModernTech Bootcamp\",\n}\n\n```\n\n\\`"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Bootcamp by id",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps/63c3d490665c93845fe16761",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "bootcamps",
+                                "63c3d490665c93845fe16761"
+                            ]
+                        },
+                        "description": "Delete request to remove bootcamp by id.\n\nCan only be performed bt the Owner/Creater of the boootcamp"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Bootcamps by zipcode",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps/radius/02881/100",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "bootcamps",
+                                "radius",
+                                "02881",
+                                "100"
+                            ]
+                        },
+                        "description": "A public route to Get bootcamp based on location search."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Bootcamp Photo by id",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "file",
+                                    "type": "file",
+                                    "src": "/C:/Users/user/Desktop/Interships/Passport Photo.jpg"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps/5d725a1b7b292f5f8ceff788/photo",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "bootcamps",
+                                "5d725a1b7b292f5f8ceff788",
+                                "photo"
+                            ]
+                        },
+                        "description": "An Put route to update Bootcamp photoby id"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Create, read, update and delete bootcamps"
+        },
+        {
+            "name": "Courses",
+            "item": [
+                {
+                    "name": "Get all courses",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/courses?select=title",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "courses"],
+                            "query": [
+                                {
+                                    "key": "select",
+                                    "value": "title"
+                                }
+                            ]
+                        },
+                        "description": "Get request to fetch all Courses in Bootcamp."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get course by id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/courses/5d725c84c4ded7bcb480eaa0",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "courses",
+                                "5d725c84c4ded7bcb480eaa0"
+                            ]
+                        },
+                        "description": "An public Get route to fetch course detail using courseId.\n\nThis support searching based on different variable in the params."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create New Course",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var res = pm.response.json();\r",
+                                    "pm.environment.set('token', res.data.token);"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2JhN2UwN2VkYWNlODI5MDVjZWNjYSIsImlhdCI6MTY3NjQwMjIwNiwiZXhwIjoxNjc4OTk0MjA2fQ.GadHnZjZghi_1nQAI02YotZwaseivLQsRgX_Ztg2EwI",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"title\": \"Full Stack Web Development + Mobile\",\r\n    \"description\": \"In this course you will learn full stack web development, first learning all about the frontend with HTML/CSS/JS/Vue and then the backend with Node.js/Express/MongoDB\",\r\n    \"weeks\": \"12\",\r\n    \"tuition\": 10000,\r\n    \"minimumSkill\": \"intermediate\",\r\n    \"scholarshipAvailable\": false\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps/63ebdd95972c18d6ce59cc8d/courses",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "bootcamps",
+                                "63ebdd95972c18d6ce59cc8d",
+                                "courses"
+                            ],
+                            "query": [
+                                {
+                                    "key": "sort",
+                                    "value": "name",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "select",
+                                    "value": "name",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "1",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "2",
+                                    "disabled": true
+                                }
+                            ]
+                        },
+                        "description": "A Post route to create new Course which can only be created by the owner of the bootcamp\n\nAn Example of the Input is\n\n``` json\n{\n    \"title\": \"Full Stack Web Development + Mobile\",\n    \"description\": \"In this course you will learn full stack web development, first learning all about the frontend with HTML/CSS/JS/Vue and then the backend with Node.js/Express/MongoDB\",\n    \"weeks\": \"12\",\n    \"tuition\": 10000,\n    \"minimumSkill\": \"intermediate\",\n    \"scholarshipAvailable\": false\n}\n\n```"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Courses by id",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2JhN2UwN2VkYWNlODI5MDVjZWNjYSIsImlhdCI6MTY3NjQwMjU5OSwiZXhwIjoxNjc4OTk0NTk5fQ.OSmm9thje4NKhjpPbqhlyfxf7M0aFgZAN5801dTFOJE",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"tuition\": 13000\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/courses/63ebdedaf1888727e4d5a997",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "courses",
+                                "63ebdedaf1888727e4d5a997"
+                            ]
+                        },
+                        "description": "An Put request to update Course by by courseId.\n\nThe Route can only be updated by the owner of the bootcamp.\n\n``` json\n{\n    \"tuition\": 13000\n}\n\n```"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Course by id",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/courses/5d725cb9c4ded7bcb480eaa1",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "courses",
+                                "5d725cb9c4ded7bcb480eaa1"
+                            ]
+                        },
+                        "description": "A Delete request Route to delete the course in the bootcamp by courseId"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Create, Release, Update and Delete Courses"
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Get All Users",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWQ1NWZkNzgyMjI2YTJlM2FmZDVmNCIsImlhdCI6MTY3NjQ5ODQ0NSwiZXhwIjoxNjc5MDkwNDQ1fQ.HiGhn4YhSLUfZ6hRfKYznbU5Ry98LZM2GRm4Sx0Qrlo",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/users",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "auth", "users"]
+                        },
+                        "description": "Get all users in the db"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Single User by id",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWQ0YjkyOGI4Mzc1ODIzYjc5NTMxYyIsImlhdCI6MTY3NjQ5Nzc1NSwiZXhwIjoxNjc5MDg5NzU1fQ.xMwbctyv8UGghOQk0LlgW3qUV6Lf-h1Bz0K-5ZLRKSA",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/users/63ed5535af80c2518009cb79",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "users",
+                                "63ed5535af80c2518009cb79"
+                            ]
+                        },
+                        "description": "Get user by id"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create User",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWQ0YjkyOGI4Mzc1ODIzYjc5NTMxYyIsImlhdCI6MTY3NjQ5Nzc1NSwiZXhwIjoxNjc5MDg5NzU1fQ.xMwbctyv8UGghOQk0LlgW3qUV6Lf-h1Bz0K-5ZLRKSA",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\": \"Manas Swain\",\r\n    \"email\": \"ManasSwain@rkmgec.com\",\r\n    \"role\": \"admin\",\r\n    \"password\": \"87654321\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/users/",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "auth", "users", ""]
+                        },
+                        "description": "Create New user with admin account"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update User by id",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWQ0YjkyOGI4Mzc1ODIzYjc5NTMxYyIsImlhdCI6MTY3NjQ5Nzc1NSwiZXhwIjoxNjc5MDg5NzU1fQ.xMwbctyv8UGghOQk0LlgW3qUV6Lf-h1Bz0K-5ZLRKSA",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\": \"Manas\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/users/63ed5535af80c2518009cb79",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "users",
+                                "63ed5535af80c2518009cb79"
+                            ]
+                        },
+                        "description": "Update a certain user by its id"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete User by id",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWQ0YjkyOGI4Mzc1ODIzYjc5NTMxYyIsImlhdCI6MTY3NjQ5Nzc1NSwiZXhwIjoxNjc5MDg5NzU1fQ.xMwbctyv8UGghOQk0LlgW3qUV6Lf-h1Bz0K-5ZLRKSA",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/auth/users/63ed5535af80c2518009cb79",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "users",
+                                "63ed5535af80c2518009cb79"
+                            ]
+                        },
+                        "description": "Delete user from db with help by id"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "CRUD Functionalities to user that is only available to admin"
+        },
+        {
+            "name": "Reviews",
+            "item": [
+                {
+                    "name": "Get All Reviews",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/reviews",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": ["api", "v1", "reviews"]
+                        },
+                        "description": "A public route to Get all reviews in different Bootcamps"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Reviews For Bootcamp",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps/5d713a66ec8f2b88b8f830b8/reviews",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "bootcamps",
+                                "5d713a66ec8f2b88b8f830b8",
+                                "reviews"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Single Review by id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/reviews/5d7a514b5d2c12c7449be022",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "reviews",
+                                "5d7a514b5d2c12c7449be022"
+                            ]
+                        },
+                        "description": "A public route to Get a review by its id"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Add Review in bootcamp",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWU2OWY2NzJkNmIyMGU5MDI4Mjk0MyIsImlhdCI6MTY3NjU2OTA4MSwiZXhwIjoxNjc5MTYxMDgxfQ.uevO54QGQDiWeGgpV3jVf5SI_TilEdkRUY-OATlasVo",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"title\": \"Nice Bootcamp\",\r\n    \"text\": \"I learned new skills\",\r\n    \"rating\": 8.1\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/bootcamps/5d713a66ec8f2b88b8f830b8/reviews",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "bootcamps",
+                                "5d713a66ec8f2b88b8f830b8",
+                                "reviews"
+                            ]
+                        },
+                        "description": "A private route to add review to a bootcamp"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Review by id",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"rating\": 7\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/reviews/5d7a514b5d2c12c7449be022",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "reviews",
+                                "5d7a514b5d2c12c7449be022"
+                            ]
+                        },
+                        "description": "A private route to update review.\n\nRoute only accesible to admin and the user"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Review by id",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"rating\": 7\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{BootcamperUrl}}/api/v1/reviews/5d7a514b5d2c12c7449be022",
+                            "host": ["{{BootcamperUrl}}"],
+                            "path": [
+                                "api",
+                                "v1",
+                                "reviews",
+                                "5d7a514b5d2c12c7449be022"
+                            ]
+                        },
+                        "description": "A private route to Delete a review by its id"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "CRUD Functionalities on review system"
+        },
+        {
+            "name": "Welcome",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2JhN2UwN2VkYWNlODI5MDVjZWNjYSIsImlhdCI6MTY3NjQwMjU5OSwiZXhwIjoxNjc4OTk0NTk5fQ.OSmm9thje4NKhjpPbqhlyfxf7M0aFgZAN5801dTFOJE",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{BootcamperUrl}}/",
+                    "host": ["{{BootcamperUrl}}"],
+                    "path": [""]
+                }
+            },
+            "response": []
+        }
+    ],
+    "variable": [
+        {
+            "key": "BootcamperUrl",
+            "value": "http://localhost:6969"
+        }
+    ]
+}
