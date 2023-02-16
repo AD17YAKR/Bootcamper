@@ -2,6 +2,7 @@ const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middlewares/async');
 const Courses = require('../models/Courses');
 const Bootcamp = require('../models/Bootcamp');
+
 //@desc     Get Courses
 //@route    GET /api/v1/courses
 //@route    GET /api/v1/bootcamps/:bootcampId/courses

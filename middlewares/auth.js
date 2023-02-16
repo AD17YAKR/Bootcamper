@@ -35,6 +35,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
         );
     }
 });
+
 //Grant access to specific routes
 exports.authorize = (...roles) => {
     return (req, res, next) => {
