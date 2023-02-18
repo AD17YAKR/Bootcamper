@@ -22,7 +22,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     sendTokenResponse(user, 200, res);
 });
 
-//@desc     Register New User
+//@desc     Login User
 //@routes   POST /api/v1/auth/login
 //@access   Public
 exports.login = asyncHandler(async (req, res, next) => {
@@ -56,7 +56,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     sendTokenResponse(user, 200, res);
 });
 
-//@desc     Log out User
+//@desc     Log Out User
 //@routes   GET /api/v1/auth/logout
 //@access   Private
 exports.logout = asyncHandler(async (req, res, next) => {
@@ -71,7 +71,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
     });
 });
 
-//@desc     Get Current Logged in user
+//@desc     Get Current Logged in user Details
 //@routes   POST /api/v1/auth/me
 //@access   Private
 exports.getMe = asyncHandler(async (req, res, next) => {
@@ -173,8 +173,8 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     sendTokenResponse(user, 200, res);
 });
 
-//@desc     Update user details
-//@routes   PUT /api/v1/auth/updatedetails
+//@desc     Update User details
+//@routes   PUT /api/v1/auth/updatedDetails
 //@access   Private
 exports.updateDetails = asyncHandler(async (req, res, next) => {
     const fieldsToUpdate = {
@@ -215,7 +215,7 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
     sendTokenResponse(user, 200, res);
 });
 
-//Helper unction to send toke response
+//Helper Function to send token response
 const sendTokenResponse = (user, statusCode, res) => {
     //JWT Token Creation
     const token = user.getSignedJwtToken();

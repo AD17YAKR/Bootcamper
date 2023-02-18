@@ -1,7 +1,7 @@
 const advanceResults = (model, populate) => async (req, res, next) => {
     let query;
 
-    //Copy request.query
+    //Destructure request.query
     const reqQuery = { ...req.query };
 
     //Fields to exclude
@@ -17,7 +17,7 @@ const advanceResults = (model, populate) => async (req, res, next) => {
 
     query = model.find(JSON.parse(queryStr));
 
-    //select fields
+    //Select Fields
     if (req.query.select) {
         const fields = req.query.select.split(',').join(' ');
         query = query.select(fields);

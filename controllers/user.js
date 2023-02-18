@@ -9,7 +9,7 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
     res.status(200).json(res.advanceResults);
 });
 
-//@desc     Get single Users
+//@desc     Get Single Users
 //@routes   GET /api/v1/auth/user/:id
 //@access   Private/Admin
 exports.getUser = asyncHandler(async (req, res, next) => {

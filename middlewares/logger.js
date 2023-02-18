@@ -1,4 +1,4 @@
-//@desc     Logs request to console
+//@desc     Logs request to console, morgan's alternative
 
 const logger = (req, res, next) => {
     console.log(
